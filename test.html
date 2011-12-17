@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+    
+</body>
+<script src="strbuf.js"></script>
+<script>
+    var buf = new StrBuf("contructor str<br/>");
+    buf.push("hello,<br/>")
+    .push("Today is {0}, {1}<br/>", "Monday", "March 28th")
+    .push("I like ${like}, my name is ${name}, my qq is ${im.qq}, msn is ${im.msn},<br/>${test.test2.son}, ${test.test2.daughter}", {
+        like: "Vim",
+        name: "yangg",
+        im: {qq: '999999', msn: 'me@live.cn'},
+        test: { test2: {son:'test grand son', daughter: 'test grand daughter'}}
+    });
+    document.write(buf);// auto call toString method
+    console.log(buf);
+    console.log(StrBuf("static {0} method", "invoke"));
+</script>
+</html>
