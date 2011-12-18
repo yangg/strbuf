@@ -22,10 +22,10 @@
     console.log(StrBuf("static {0} method", "invoke"));
  */
 StrBuf = function(s) {
-    this.data = [];
-    if (s) {
+    this.__data = [];
+    if(s) {
         var args = arguments, buf;
-        if (this instanceof StrBuf) {
+        if(this instanceof StrBuf) {
             this.push.apply(this, args);
         } else {// static invoke
             buf = new StrBuf();
@@ -38,12 +38,12 @@ StrBuf.prototype = {
      * add String to the instance
      * @return StrBuf make it chainability
      */
-    push: function(s, o) {
-        var args = arguments;
-        if (args.length < 2) {
-            this.data.push(getStr(s));
+    push: function(s/*, {Object/String...} */) {
+        var args = arguments, o = args[1], str;
+        if(args.length < 2) {
+            str = getStr(s);
         } else if(typeof o == 'object') {
-            this.data.push(s.replace(/\$\{([\w.]+)\}/g, function($, $1) {
+            str = s.replace(/\$\{([\w.]+)\}/g, function($, $1) {
                 var parts = $1.split('.'), i = 0, len = parts.length, res = o;
                 while(i < len) {
                     try {
@@ -53,12 +53,13 @@ StrBuf.prototype = {
                     }
                 }
                 return res;
-            }));
+            });
         } else {
-            this.data.push(s.replace(/\{(\d+)\}/g, function($, $1) {
+            str = s.replace(/\{(\d+)\}/g, function($, $1) {
                 return args[+$1 + 1];
-            }));
+            });
         }
+        this.__data.push(str);
         return this;// chainability
     },
     /**
@@ -66,7 +67,7 @@ StrBuf.prototype = {
      * @param {String} delimiter default to ''(empty string)
      */
     toString: function(delimiter) {
-        return this.data.join(getStr(delimiter));
+        return this.__data.join(getStr(delimiter));
     }
 };
 
