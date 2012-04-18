@@ -38,10 +38,10 @@ StrBuf.prototype = {
      * add String to the instance
      * @return StrBuf make it chainability
      */
-    push: function(s/*, {Object/String...} */) {
-        var args = arguments, o = args[1], str;
+    push: function(s, /*{Object/String...} */o, _undef) {
+        var args = arguments, str;
         if(args.length < 2) {
-            str = getStr(s);
+            str = s == undefined ? '' : s;
         } else if(typeof o == 'object') {
             str = s.replace(/\$\{([\w.]+)\}/g, function($, $1) {
                 var parts = $1.split('.'), i = 0, len = parts.length, res = o;
@@ -52,7 +52,7 @@ StrBuf.prototype = {
                         res = $;
                     }
                 }
-                return res;
+                return res == undefined ? _undef : res;
             });
         } else {
             str = s.replace(/\{(\d+)\}/g, function($, $1) {
@@ -67,11 +67,7 @@ StrBuf.prototype = {
      * @param {String} delimiter default to ''(empty string)
      */
     toString: function(delimiter) {
-        return this.__data.join(getStr(delimiter));
+        return this.__data.join(delimiter == undefined ? '' : delimiter);
     }
 };
-
-function getStr(s) {
-    return s == undefined ? '' : s;
-}
 })();
