@@ -1,9 +1,9 @@
 /*!
- * @author: uedsky
+ * StrBuf: A javascript string buffer class
+ * @author uedsky (http://uedsky.com)
  * Last Modified: Dec 17, 2011
  */
 
-(function() {
 /**
  * @class String concat
  * @return {StrBuf/String}
@@ -21,7 +21,7 @@
     console.log(buf);
     console.log(StrBuf("static {0} method", "invoke"));
  */
-StrBuf = function(s) {
+function StrBuf(s) {
     this.__data = [];
     if(s) {
         var args = arguments, buf;
@@ -32,7 +32,7 @@ StrBuf = function(s) {
             return buf.push.apply(buf, args).toString();
         }
     }
-};
+}
 StrBuf.prototype = {
     /**
      * add String to the instance
@@ -41,7 +41,7 @@ StrBuf.prototype = {
     push: function(s, /*{Object/String...} */o, _undef) {
         var args = arguments, str;
         if(args.length < 2) {
-            str = s == undefined ? '' : s;
+            str = s === undefined ? '' : s;
         } else if(typeof o == 'object') {
             str = s.replace(/\$\{([\w.]+)\}/g, function($, $1) {
                 var parts = $1.split('.'), i = 0, len = parts.length, res = o;
@@ -52,7 +52,7 @@ StrBuf.prototype = {
                         res = $;
                     }
                 }
-                return res == undefined ? _undef : res;
+                return res === undefined ? _undef : res;
             });
         } else {
             str = s.replace(/\{(\d+)\}/g, function($, $1) {
@@ -67,7 +67,6 @@ StrBuf.prototype = {
      * @param {String} delimiter default to ''(empty string)
      */
     toString: function(delimiter) {
-        return this.__data.join(delimiter == undefined ? '' : delimiter);
+        return this.__data.join(delimiter === undefined ? '' : delimiter);
     }
 };
-})();
