@@ -1,7 +1,7 @@
 /*!
  * StrBuf: A javascript string buffer class
  * @author uedsky (http://uedsky.com)
- * Last Modified: Dec 17, 2011
+ * Last Modified: Jan 24, 2015
  */
 
 /**
@@ -9,18 +9,25 @@
  * @return {StrBuf/String}
  * @constructor
  * eg:
-    var buf = new StrBuf("contructor str<br/>");
-    buf.push("hello,<br/>")
-    .push("Today is {0}, {1}<br/>", "Monday", "March 28th")
-    .push("I like ${like}, my name is ${name}, my qq is ${im.qq}, msn is ${im.msn}", {
+    var buf = new StrBuf("Hello,<br/>");
+    buf.push("Today ")
+    .push("is {0}, {1}<br/>", "Monday", "March 28th")
+    .push("My name is ${name}, I like ${like}, my QQ is ${im.qq}, msn is ${im.msn},<br/>${test.test2.son}, ${test.test2.daughter}", {
         like: "Vim",
-        name: "yang",
-        im: {qq: '999999', msn: 'me@live.cn'}
-    });
+        name: "Brook",
+        im: { qq: '123456', msn: 'brook@live.cn' },
+        test: { test2: {son:'test grandson', daughter: 'test granddaughter'}}
+    })
+    .pushArray('<div>${name}, ${birth}</div>' , [
+        {name: 'C#', birth: '2000'},
+        {name: 'PHP, Java, Javascript', birth: '1995'}
+    ]);
     document.write(buf);// auto call toString method
+    console.log(aa);
     console.log(buf);
     console.log(StrBuf("static {0} method", "invoke"));
  */
+(function() {
 function StrBuf(s) {
     this.__data = [];
     if(s) {
@@ -62,6 +69,13 @@ StrBuf.prototype = {
         this.__data.push(str);
         return this;// chainability
     },
+    pushArray: function(s, arr, _undef) {
+        for(var i = 0, item; i < arr.length; i++) {
+            item = arr[i];
+            // item.__index = i;
+            this.push(s, item, _undef);
+        }
+    },
     /**
      * get the final string
      * @param {String} delimiter default to ''(empty string)
@@ -70,3 +84,5 @@ StrBuf.prototype = {
         return this.__data.join(delimiter === undefined ? '' : delimiter);
     }
 };
+window.strbuf = StrBuf;
+})();
