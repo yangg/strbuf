@@ -1,7 +1,8 @@
+'use strict';
 /*!
- * StrBuf: A javascript string buffer class
- * @author Brook (http://uedsky.com)
- * Last Modified: Jan 24, 2015
+ * strbuf
+ * Concat javascript string in es6 way, and more!
+ * @author Brook Yang https://github.com/yangg/strbuf
  */
 
 

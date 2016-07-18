@@ -2,25 +2,35 @@
 
 [![Build Status](https://travis-ci.org/yangg/strbuf.svg?branch=master)](https://travis-ci.org/yangg/strbuf) [![Code Climate](https://codeclimate.com/github/yangg/strbuf/badges/gpa.svg)](https://codeclimate.com/github/yangg/strbuf)
 
-Concat Javascript string in es6 way
+Concat javascript string in es6 way, and more!
 
 ## Usage
-### Using as a function
+
+Given:
+
 ```js
-strbuf('hello, ${name}, ${info.age}', {name: 'Brook', info: { age: 26 }});
-strbuf('hello, {0}, {1}', 'Brook', 26);
+var json = {
+  msg: "foo",
+  info: { bar: 'hello'},
+  list: [
+    { name: 'a', date: '2016/7'},
+    { name: 'b', date: '2016/8'},
+  ]
+};
+```
+Expect:
+#### Using as a function
+```js
+strbuf('hello, ${msg}, ${info.bar}', json);
+strbuf('hello, {0}, {1}', 'foo', 'hello');
 ```
 
-### Using as a class
+#### Using as a class
 ```js
 var html = new strbuf('<ul>');
-html.push('<li>${title}</li>', {title: 'Title'})
-  .push('<li>{0}{1}</li>', 'sub', 'title');
-var data = [
-  {name: 'name1', date: '2016/7'},
-  {name: 'name2', date: '2016/6'}
-];
-html.pushArray('<li>${name} - ${date}</li>', data);
+html.push('<li>${msg}-${info.bar}</li>', json)
+  .push('<li>{0}-{1}</li>', 'foo', 'hello');
+html.pushArray('<li>${name} - ${date}</li>', json.list);
 html.toString();
 ```
 
