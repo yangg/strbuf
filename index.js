@@ -12,16 +12,14 @@
    * @return {StrBuf/String}
    * @constructor
    */
-  function StrBuf(s) {
-      this.__data = [];
-      if(s) {
-          var args = arguments, buf;
-          if(this instanceof StrBuf) {
-              this.push.apply(this, args);
-          } else {// static invoke
-              buf = new StrBuf();
-              return buf.push.apply(buf, args).toString();
-          }
+  function StrBuf() {
+      var args = arguments, buf;
+      if(this instanceof StrBuf) {
+          this.__data = [];
+          this.push.apply(this, args);
+      } else {// static invoke
+          buf = new StrBuf();
+          return buf.push.apply(buf, args).toString();
       }
   }
   StrBuf.prototype = {

@@ -4,6 +4,10 @@ const assert = require('chai').assert;
 const strbuf = require('../');
 describe('strbuf', function() {
   describe('work as a function', function() {
+    it('should output string', function() {
+      assert.equal(strbuf('foo'), 'foo');
+      assert.equal(strbuf(), '');
+    });
     it('should output object data via dot notation', function() {
       assert.equal(strbuf('My name is ${name}, Im ${info.age}', {name: 'Brook', info: {age: 26 }}), 'My name is Brook, Im 26');
     });
@@ -21,6 +25,11 @@ describe('strbuf', function() {
   });
 
   describe('work as a class', function() {
+    it('should output string', function() {
+      var str = new strbuf('foo');
+      assert.equal(str.toString(), 'foo');
+      assert.equal(new strbuf().toString(), '');
+    });
     it('should push worked', function() {
       var str = new strbuf();
       str.push('My name is ${name}, Im ${info.age}', {name: 'Brook', info: {age: 26 }});
