@@ -32,7 +32,7 @@
           var args = arguments, str;
           if(args.length < 2) {
               str = s === undefined ? '' : s;
-          } else if(typeof o == 'object') {
+          } else if(typeof o === 'object') {
               str = s.replace(/\$\{([\w.]+)\}/g, function($, $1) {
                   var parts = $1.split('.'), i = 0, len = parts.length, res = o;
                   while(i < len) {
@@ -67,7 +67,7 @@
           return this.__data.join(delimiter === undefined ? '' : delimiter);
       }
   };
-  if(typeof module != undefined) {
+  if(typeof module !== 'undefined') {
     module.exports = StrBuf;
   } else {
     window.strbuf = StrBuf;
