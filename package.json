@@ -1,0 +1,27 @@
+{
+  "name": "strbuf",
+  "version": "1.0.0",
+  "description": "concat javascript string in es6 way",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangg/strbuf.git"
+  },
+  "keywords": [
+    "javascript",
+    "string",
+    "concat"
+  ],
+  "author": "Brook Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yangg/strbuf/issues"
+  },
+  "homepage": "https://github.com/yangg/strbuf#readme",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}
