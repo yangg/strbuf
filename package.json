@@ -1,10 +1,11 @@
 {
-  "name": "strbuf",
+  "name": "@brook/strbuf",
   "version": "1.0.0",
   "description": "concat javascript string in es6 way",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "postversion": "git push && npm_config_registry=https://registry.npmjs.org/ npm publish --access public"
   },
   "repository": {
     "type": "git",
