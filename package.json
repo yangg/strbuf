@@ -1,6 +1,6 @@
 {
   "name": "@brook/strbuf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "concat javascript string in es6 way",
   "main": "index.js",
   "scripts": {
